@@ -8,6 +8,10 @@ app.get("/", (req, res) => {
     res.sendFile("static/html/index.html", {root: __dirname});
 });
 
+app.get("/getText", (req, res) => {
+    res.send("Hi");
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => {
