@@ -1,12 +1,16 @@
 const express = require("express");
 const fs = require("fs");
 const { MongoClient } = require("mongodb");
+const blogPostsRoutes = require("./routes/blog-posts");
+const bp = require("body-parser");
 
 // Start express
 const app = express();
 
-// Include static files in app
-app.use(express.static("static"));
+app.use(express.urlencoded({extended: false}));  // Put the body of requests req.body instead of URL
+app.use(express.json());  // Read JSON data from POST requests
+app.use(express.static("static"));  // Include static files in app
+app.use(blogPostsRoutes); // Routes for blog post endpoints
 
 // MongoDB connection URI
 const URI = JSON.parse(fs.readFileSync("database-user.json"))["uri"];
@@ -16,26 +20,6 @@ const mongoClient = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopo
 
 app.get("/", (req, res) => {
     res.sendFile("static/html/index.html", {root: __dirname});
-});
-
-app.get("/getText", (req, res) => {
-    res.send("Hi");
-
-    mongoClient.connect((err, db) => {
-        const collection = mongoClient.db(
-            JSON.parse(fs.readFileSync("database-user.json"))["database-name"]).collection(
-            JSON.parse(fs.readFileSync("database-user.json"))["collection-name"]);
-
-        objectToInsert = {title: "Manually Added Post Directly to Database", body: "Ha, I added this post directly to the database instead of having some programming logic."};
-
-        collection.insertOne(objectToInsert, (err, res) => {
-            if (err) {
-                throw err;
-            }
-            console.log("Document inserted");
-            mongoClient.close();
-        });
-    });
 });
 
 const PORT = 5000;

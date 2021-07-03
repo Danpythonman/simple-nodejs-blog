@@ -7,5 +7,4 @@ function onClick() {
     };
     xhttp.open("GET", "/getText", true);
     xhttp.send();
-    console.log(1);
 }
