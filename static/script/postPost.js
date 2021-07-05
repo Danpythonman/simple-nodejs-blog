@@ -2,7 +2,7 @@ function postPost() {
     let xhttp = new XMLHttpRequest();
     let params = "title=" + document.getElementById("postTitle").value + "&body=" + document.getElementById("postBody").value;
 
-    xhttp.open("POST", "/addNewBlogPost", true);
+    xhttp.open("POST", "/api/addNewBlogPost", true);
 
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
