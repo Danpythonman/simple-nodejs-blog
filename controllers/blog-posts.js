@@ -4,7 +4,7 @@ const blogPostSchema = require("../models/blog-post");
 
 const URI = JSON.parse(fs.readFileSync("./database-user.json"))["uri"];
 const dataBaseName = JSON.parse(fs.readFileSync("./database-user.json"))["database-name"];
-const collectionName = JSON.parse(fs.readFileSync("./database-user.json"))["collection-name"];
+const collectionName = JSON.parse(fs.readFileSync("./database-user.json"))["posts-collection-name"];
 
 /* * * * * * * * * * * * * * * Get all blog posts * * * * * * * * * * * * * * */
 
